@@ -1,0 +1,2 @@
+### GET PUBLIC HOME PAGE
+GET http://localhost:5000/

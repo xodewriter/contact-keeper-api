@@ -8,12 +8,14 @@ app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
 
 // GET home page
-// app.get('/', (req, res) => {
-// 	res.json({ msg: 'Welcome to the home page' });
-// });
+app.get('/', (req, res) => {
+	res.json({ msg: 'Welcome to the home page' });
+});
 
 // Routes
-app.use('/', require('./routes/index'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/contacts', require('./routes/contacts'));
 
 // Global Vars
 const HOST = config.get('server.HOST') || 'localhost';

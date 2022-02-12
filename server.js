@@ -1,7 +1,11 @@
 const express = require('express');
 const config = require('config');
+const connectDB = require('./config/db');
 
 const app = express();
+
+// Connect DB
+connectDB();
 
 // Middleware
 app.use(express.json({ extended: false }));

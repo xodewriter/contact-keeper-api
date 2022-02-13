@@ -2,6 +2,7 @@ const express = require('express');
 const config = require('config');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const { Mongoose } = require('mongoose');
 
@@ -43,28 +44,35 @@ router.post(
 				return res.status(400).json({ msg: 'User already exists' });
 			}
 
-			// User
+			// Encrypt password
+			let salt = bcrypt.genSaltSync(10);
+			let hash = bcrypt.hashSync(password, salt);
+
 			user = new User({
 				name,
 				email,
 				password,
 			});
 
-			// Encrypt password
-			let salt = await bcrypt.genSaltSync(10);
-			let hash = await bcrypt.hashSync(password, salt);
+			// Generate token
 
-			// Update user to hold hashed pw
-			user.password = hash;
+			// Token Signature
+			const token = jwt.sign(
+				{ user },
+				TOKEN_SECRET,
+				{ expiresIn: 360000 },
+				(err, token) => {
+					//
+					if (err) {
+						console.log(err.message);
+					}
+					console.log('TOKEN:', token);
 
-			await user.save();
-
-			// Pass
-			res.json({ msg: 'Registered a user', users });
+					res.json({ msg: 'Register a user', token });
+				},
+			);
 		} catch (err) {
-			// Fail
-			console.log('Error:', err.message);
-			res.status(500).json({ error: err.message });
+			res.send('Ooops, something went wrong!');
 		}
 	},
 );

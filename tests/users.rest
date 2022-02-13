@@ -4,6 +4,6 @@ Content-Type: application/json
 
 {
   "name": "Fred",
-  "email": "fred@bedrock.com",
-  "password": "12345"
+  "email": "fredss2@bedrock.com",
+  "password": "123456"
 }

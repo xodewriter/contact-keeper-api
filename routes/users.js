@@ -2,13 +2,14 @@ const express = require('express');
 const config = require('config');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const { Mongoose } = require('mongoose');
 
 const User = require('../models/User');
 
 // Global Vars
-const TOKEN_SECRET = config.get('db.TOKEN_SECRET');
+const JWT_SECRET = config.get('db.JWT_SECRET');
 
 // @route     POST /api/users
 // @desc      Register a user
@@ -59,10 +60,32 @@ router.post(
 
 			await user.save();
 
-			// Pass
-			res.json({ msg: 'Registered a user', users });
+			// User info to store in token
+			const payload = {
+				user: {
+					id: user.id,
+				},
+			};
+
+			// Generate Token Signature
+			jwt.sign(
+				payload,
+				JWT_SECRET,
+				{
+					expiresIn: 360000,
+				},
+				(err, token) => {
+					// Fail
+					if (err) {
+						console.log('Error:', err.message);
+						res.status(500).json({ error: err.message });
+					}
+					// Pass
+					res.json({ msg: 'Registered a user', token });
+				},
+			);
 		} catch (err) {
-			// Fail
+			// Server Error 500
 			console.log('Error:', err.message);
 			res.status(500).json({ error: err.message });
 		}

@@ -1,3 +1,15 @@
 ### GET CONTACTS BELONGING TO AUTHORIZED USER
 GET http://localhost:5000/api/contacts
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIwOTFlZGJmNWVjY2Y4ZDkwMjg2MzVjIn0sImlhdCI6MTY0NDg0MzM2MywiZXhwIjoxNjQ1MjAzMzYzfQ.BBVXtOcBdaAJin68VlpVpBX3iHUTiMZMA3UJ8XAdTmg
+
+### ADD A NEW CONTACT
+POST http://localhost:5000/api/contacts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIwOTFlZGJmNWVjY2Y4ZDkwMjg2MzVjIn0sImlhdCI6MTY0NDg0MzM2MywiZXhwIjoxNjQ1MjAzMzYzfQ.BBVXtOcBdaAJin68VlpVpBX3iHUTiMZMA3UJ8XAdTmg
+Content-Type: application/json
+
+{
+  "name": "Gary Trent Jr",
+  "email": "gary@raptors.com",
+  "phone": "330-330-3303",
+  "type": "professional"
+}

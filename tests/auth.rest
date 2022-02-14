@@ -3,7 +3,7 @@ POST http://localhost:5000/api/auth
 Content-Type: application/json
 
 {
-  "email": "fred@bedrock.com",
+  "email": "barney@bedrock.com",
   "password": "123456"
 }
 

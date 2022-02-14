@@ -1,19 +1,26 @@
 const express = require('express');
 const config = require('config');
+const JWT_SECRET = config.get('db.JWT_SECRET');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
 
 const User = require('../models/User');
 
-const JWT_SECRET = config.get('db.JWT_SECRET');
-
 // @route     GET /api/auth
 // @desc      Get logged in user
 // @access    Private
-router.get('/', (req, res) => {
-	res.send('Get logged in user');
+router.get('/', auth, async (req, res) => {
+	try {
+		const user = await User.findById(req.user.id).select('-password');
+		res.json({ msg: 'Authorized User', user });
+	} catch (err) {
+		// Server Error 500
+		console.log('Server Error:', err.message);
+		res.status(500).json({ serverError: err.message });
+	}
 });
 
 // @route     POST /api/auth
@@ -24,7 +31,7 @@ router.post(
 	body('email').isEmail().withMessage('Please use a valid email'),
 	body('password')
 		.isLength({ min: 6 })
-		.withMessage('Passwords must be 6 or more chars'),
+		.withMessage('Please enter a passwords with 6 or more characters'),
 	async (req, res) => {
 		// Finds the validation errors in this request and wraps them in an object with handy functions
 		const errors = validationResult(req);
@@ -37,16 +44,17 @@ router.post(
 
 		try {
 			// Find user from MongoDB
-			const user = await User.findOne({ email });
+			let user = await User.findOne({ email });
 
+			// If user not found
 			if (!user) {
 				return res.status(400).json({ msg: 'Invalid Credentials' });
 			}
 
-			// Check if string password matches hashed password
+			// Check if plain password matches hashed password
 			const isPasswordMatch = await bcrypt.compareSync(password, user.password);
 
-			// IF isPasswordMatch is false
+			// If passwords don't match: @false
 			if (!isPasswordMatch) {
 				return res.status(400).json({ msg: 'Invalid Credentials' });
 			}
@@ -76,8 +84,8 @@ router.post(
 			);
 		} catch (err) {
 			// Server Error 500
-			console.log('Error:', err.message);
-			res.status(500).json({ error: err.message });
+			console.log('Server Error:', err.message);
+			res.status(500).json({ serverError: err.message });
 		}
 	},
 );

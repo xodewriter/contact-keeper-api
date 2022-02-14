@@ -25,7 +25,7 @@ router.post(
 	body('email').isEmail().withMessage('Please use a valid email'),
 	body('password')
 		.isLength({ min: 6 })
-		.withMessage('Passwords must be 6 or more chars'),
+		.withMessage('Please enter a passwords with 6 or more characters'),
 	async (req, res) => {
 		// Finds the validation errors in this request and wraps them in an object with handy functions
 		const errors = validationResult(req);
@@ -86,8 +86,8 @@ router.post(
 			);
 		} catch (err) {
 			// Server Error 500
-			console.log('Error:', err.message);
-			res.status(500).json({ error: err.message });
+			console.log('Server Error:', err.message);
+			res.status(500).json({ serverError: err.message });
 		}
 	},
 );

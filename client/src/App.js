@@ -1,21 +1,21 @@
+import { Fragment } from 'react';
+import Navbar from './components/layout/Navbar';
+import { Routes, Route } from 'react-router-dom';
+import Home from './components/pages/Home';
+import About from './components/pages/About';
 import './App.css';
 
 const App = () => {
 	return (
-		<div className='App'>
-			<h1>Contact Keeper App</h1>
-			<ul class='fa-ul'>
-				<li>
-					<i class='fa-li fa fa-check-square'></i>Test font awesome
-				</li>
-				<li>
-					<i class='fa-li fa fa-spinner fa-spin'></i>Test font awesome
-				</li>
-				<li>
-					<i class='fa-li fa fa-square'></i>Test font awesome
-				</li>
-			</ul>
-		</div>
+		<Fragment>
+			<Navbar />
+			<div className='container'>
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/about' element={<About />} />
+				</Routes>
+			</div>
+		</Fragment>
 	);
 };
 

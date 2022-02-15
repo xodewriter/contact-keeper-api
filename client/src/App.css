@@ -366,8 +366,13 @@ table th {
 	margin-bottom: 1rem;
 }
 
+.navbar h1 {
+	margin-bottom: 0;
+}
+
 .navbar ul {
 	display: flex;
+	margin-bottom: 0;
 }
 
 .navbar a {

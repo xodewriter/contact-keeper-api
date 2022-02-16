@@ -36,6 +36,10 @@ ul {
 	list-style: none;
 }
 
+ul.list {
+	padding-left: 2px;
+}
+
 img {
 	width: 100%;
 }

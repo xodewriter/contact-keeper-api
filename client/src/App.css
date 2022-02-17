@@ -393,6 +393,8 @@ table th {
 	margin-right: 0.6rem;
 }
 
+/* React Transition Group */
+
 /* Animation (Add After) */
 .item-enter {
 	opacity: 0;
@@ -403,10 +405,12 @@ table th {
 }
 .item-exit {
 	opacity: 1;
+	/* transform: translateX(1000px); */
 }
 .item-exit-active {
 	opacity: 0;
 	transition: opacity 1000ms ease-in;
+	/* transform: translateX(1000px); */
 }
 
 /* Mobile Styles */

@@ -10,7 +10,7 @@ import {
 } from '../types';
 
 const authReducer = (state, action) => {
-	switch (action) {
+	switch (action.type) {
 		case REGISTER_SUCCESS:
 			return {
 				// Temp for setup

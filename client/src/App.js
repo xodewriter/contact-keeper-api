@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
 import Navbar from './components/layout/Navbar';
 import { Routes, Route } from 'react-router-dom';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import AuthState from './context/auth/AuthState';
@@ -17,6 +19,8 @@ const App = () => {
 						<Routes>
 							<Route path='/' element={<Home />} />
 							<Route path='/about' element={<About />} />
+							<Route path='/login' element={<Login />} />
+							<Route path='/register' element={<Register />} />
 						</Routes>
 					</div>
 				</Fragment>

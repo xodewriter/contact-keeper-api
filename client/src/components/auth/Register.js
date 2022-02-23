@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
 
 const initialState = {
@@ -10,7 +11,18 @@ const initialState = {
 
 const Register = () => {
 	const alertContext = useContext(AlertContext);
+	const authContext = useContext(AuthContext);
+
 	const { setAlert } = alertContext;
+	const { register, error, clearErrors } = authContext;
+
+	useEffect(() => {
+		// For larger apps would use an ID instead of a string
+		if (error === 'User already exists') {
+			setAlert(error, 'danger');
+			clearErrors();
+		}
+	}, [error, setAlert, clearErrors]);
 
 	const [user, setUser] = useState(initialState);
 	const { name, email, password, password2 } = user;
@@ -28,6 +40,7 @@ const Register = () => {
 			setAlert('Password must have minium 6 characters', 'danger');
 		} else {
 			console.log('Registered:', user);
+			register({ name, email, password });
 		}
 	};
 

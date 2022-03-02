@@ -11,9 +11,18 @@ import {
 
 const authReducer = (state, action) => {
 	switch (action.type) {
+		case USER_LOADED:
+			return {
+				...state,
+				isAuthenticated: true,
+				loading: false,
+				// User Data Object from res.data
+				user: action.payload,
+			};
 		case REGISTER_SUCCESS:
-			// Get token & put in local storage
-			localStorage.setItem('token', action.payload.token);
+			// Get res.data.token & put in local storage
+			console.log('REGISTER SUCCESS', action.payload);
+			localStorage.setItem('token', action.payload);
 			return {
 				...state,
 				// Put token in the state
@@ -23,8 +32,10 @@ const authReducer = (state, action) => {
 				loading: false,
 			};
 		case REGISTER_FAIL:
-			// Remove any existing token from local storage
+		case AUTH_ERROR:
+			// Remove any existing token from localStorage
 			localStorage.removeItem('token');
+
 			return {
 				...state,
 				// Reset everything, but not identical to initalState

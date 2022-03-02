@@ -9,7 +9,14 @@ import About from './components/pages/About';
 import AuthState from './context/auth/AuthState';
 import ContactState from './context/contact/ContactState';
 import AlertState from './context/alert/AlertState';
+import setAuthToken from './components/utils/setAuthToken';
 import './App.css';
+
+// Place here to load every time the main component loads
+// Load token into global headers with axios
+if (localStorage.token) {
+	setAuthToken(localStorage.token);
+}
 
 const App = () => {
 	return (

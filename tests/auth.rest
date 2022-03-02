@@ -3,11 +3,11 @@ POST http://localhost:5000/api/auth
 Content-Type: application/json
 
 {
-  "email": "barney@bedrock.com",
-  "password": "123456"
+  "email": "eleven@test.com",
+  "password": "112233"
 }
 
 ### AUTH USER
 GET http://localhost:5000/api/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIwOTFlZGJmNWVjY2Y4ZDkwMjg2MzVjIn0sImlhdCI6MTY0NDg0MzM2MywiZXhwIjoxNjQ1MjAzMzYzfQ.BBVXtOcBdaAJin68VlpVpBX3iHUTiMZMA3UJ8XAdTmg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIxZmI4NTliMTRiNjNhMTJhNGJiZjhmIn0sImlhdCI6MTY0NjI0NjA0NSwiZXhwIjoxNjQ2NjA2MDQ1fQ.zFBpTscSis-rXRlaus0EKNUvRqkTd5imUT3DFAXPOeQ
 

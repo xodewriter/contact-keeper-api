@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
 
@@ -9,12 +10,12 @@ const initialState = {
 	password2: '',
 };
 
-const Register = () => {
+const Register = props => {
 	const alertContext = useContext(AlertContext);
 	const authContext = useContext(AuthContext);
 
 	const { setAlert } = alertContext;
-	const { register, error, clearErrors } = authContext;
+	const { register, error, clearErrors, isAuthenticated } = authContext;
 
 	useEffect(() => {
 		// For larger apps would use an ID instead of a string
@@ -22,7 +23,13 @@ const Register = () => {
 			setAlert(error, 'danger');
 			clearErrors();
 		}
-	}, [error, setAlert, clearErrors]);
+
+		// setAlert, clearErrors: Use eslint-diable so they are not set as dependencies. It causes infinite loop.
+
+		// Add props.history to dependencies like Brad instead of navigate?
+
+		// eslint-disable-next-line
+	}, [error, isAuthenticated, props.history]);
 
 	const [user, setUser] = useState(initialState);
 	const { name, email, password, password2 } = user;
@@ -39,10 +46,13 @@ const Register = () => {
 		} else if (password.length < 6 || password2.length < 6) {
 			setAlert('Password must have minium 6 characters', 'danger');
 		} else {
-			console.log('Registered:', user);
+			console.log('Registered User:', user);
 			register({ name, email, password });
 		}
 	};
+
+	// Redirect to homepage if the user is authenticated
+	if (isAuthenticated) return <Navigate to='/' />;
 
 	return (
 		<div className='form-container'>

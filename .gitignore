@@ -1,6 +1,7 @@
 # ROOT DIR / GLOBAL
 node_modules/
-config/
+config/default.json
+config/production.json
 
 # CLIENT DIR
 

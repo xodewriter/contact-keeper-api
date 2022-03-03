@@ -46,7 +46,7 @@ const Register = props => {
 		} else if (password.length < 6 || password2.length < 6) {
 			setAlert('Password must have minium 6 characters', 'danger');
 		} else {
-			console.log('Registered User:', user);
+			console.log(name, email, password);
 			register({ name, email, password });
 		}
 	};

@@ -19,7 +19,7 @@ router.get('/', auth, async (req, res) => {
 		res.send(contacts);
 	} catch (err) {
 		// Server Error 500
-		console.log('Server Error:', err.message);
+		// console.log('Server Error:', err.message);
 		res.status(500).json({ serverError: err.message });
 	}
 });
@@ -55,7 +55,7 @@ router.post(
 			res.json({ msg: 'Added a new contact', contact });
 		} catch (err) {
 			// Server Error 500
-			console.log('Server Error:', err.message);
+			// console.log('Server Error:', err.message);
 			res.status(500).json({ serverError: err.message });
 		}
 	},
@@ -74,7 +74,7 @@ router.put('/:id', auth, async (req, res) => {
 	if (phone) contactFields.phone = phone;
 	if (type) contactFields.type = type;
 
-	console.log(contactFields);
+	// console.log(contactFields);
 
 	try {
 		// Find contact by id
@@ -94,11 +94,11 @@ router.put('/:id', auth, async (req, res) => {
 			{ new: true },
 		);
 
-		console.log(contact);
+		// console.log(contact);
 		res.json({ msg: 'Updated contact', contact });
 	} catch (err) {
 		// Server Error 500
-		console.log('Server Error:', err.message);
+		// console.log('Server Error:', err.message);
 		res.status(500).json({ serverError: err.message });
 	}
 });
@@ -124,7 +124,7 @@ router.delete('/:id', auth, async (req, res) => {
 		res.json({ msg: 'Contact removed' });
 	} catch (err) {
 		// Server Error 500
-		console.log('Server Error:', err.message);
+		// console.log('Server Error:', err.message);
 		res.status(500).json({ serverError: err.message });
 	}
 });

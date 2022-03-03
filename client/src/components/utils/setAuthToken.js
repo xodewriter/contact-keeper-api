@@ -13,13 +13,13 @@ const setAuthToken = token => {
 	// In AuthState.js uses setAuthToken(localStorage.token);
 	// Where localStore.token is the token
 	if (token) {
-		console.log('setAuth AUTHORIZED:', token);
-		console.log('setAuth AUTHORIZED:', typeof token);
+		// console.log('setAuth AUTHORIZED:', token);
+		// console.log('setAuth AUTHORIZED:', typeof token);
 		// Set to whatever the token is
 		axios.defaults.headers.common['Authorization'] = token;
 	} else {
-		console.log('setAuth NOT AUTHORIZED', token);
-		console.log('setAuth NOT AUTHORIZED', typeof token);
+		// console.log('setAuth NOT AUTHORIZED', token);
+		// console.log('setAuth NOT AUTHORIZED', typeof token);
 		// Delete Authorization if no token was passed in
 		delete axios.defaults.headers.common['Authorization'];
 	}

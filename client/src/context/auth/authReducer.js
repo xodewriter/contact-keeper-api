@@ -21,7 +21,7 @@ const authReducer = (state, action) => {
 			};
 		case REGISTER_SUCCESS:
 			// Get res.data.token & put in local storage
-			console.log('REGISTER SUCCESS', action.payload);
+			// console.log('REGISTER SUCCESS', action.payload);
 			localStorage.setItem('token', action.payload);
 			return {
 				...state,

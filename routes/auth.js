@@ -18,7 +18,7 @@ router.get('/', auth, async (req, res) => {
 		res.json({ msg: 'Authorized User', user });
 	} catch (err) {
 		// Server Error 500
-		console.log('Server Error:', err.message);
+		// console.log('Server Error:', err.message);
 		res.status(500).json({ serverError: err.message });
 	}
 });

@@ -77,7 +77,8 @@ router.post(
 				(err, token) => {
 					// Fail
 					if (err) {
-						console.log('Error:', err.message);
+						// Error coming from here
+						// console.log('Error:', err.message);
 						res.status(500).json({ error: err.message });
 					}
 					// Pass
@@ -86,7 +87,7 @@ router.post(
 			);
 		} catch (err) {
 			// Server Error 500
-			console.log('Server Error:', err.message);
+			// console.log('Server Error:', err.message);
 			res.status(500).json({ serverError: err.message });
 		}
 	},
